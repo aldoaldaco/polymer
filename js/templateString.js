@@ -1,2 +1,2 @@
-const hola = "Hola";
+const hola = true;
 document.body.innerHTML = `<b>${hola}</b>`;

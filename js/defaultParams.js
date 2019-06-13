@@ -2,7 +2,7 @@ const area = (n = 1, m = 1) => {
   return n * m;
 };
 const area2 = (n, m) => {
-  return n || 1 * m || 1;
+  return (n || 1) * (m || 1);
 };
 const area3 = (n, m) => {
   if(n && m) {

@@ -25,7 +25,6 @@ function validatePassword(password) {
       // password doesn't match, return an error with reject
       return reject('Invalid Password!');
     }
-
     // password matches, return a success state with resolve
     resolve();
   });
@@ -37,7 +36,6 @@ function done(err) {
     console.log(err);
     return; // stop execution
   }
-
   // console out a valid state
   console.log('Password is valid!');
 }

@@ -19,9 +19,11 @@ class Person {
     return new Person('alguien', 'alguno', 10, 70);
   }
 }
-//Static Person.description();
+Person.description();
 const aldo = new Person('aldo', 'aldaco', 27, 68);
+
 const alguien = Person.create();
 aldo.greeting();
 alguien.greeting();
+
 console.log('***********************************************CLASSES END');

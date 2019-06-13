@@ -15,11 +15,6 @@ const address = {
 };
 const {city: c, state: s, zip: z} = address;
 console.log(c, s, z);
-const aboutEdward = {
-  info: ['Edward', 30],
-  favColor: 'blue',
-  favSushiRoll: 'Squidy squid squid'
-};
 const profilePage = ({favColor} = {favColor: 'vintage pink'}, [name, age] = ['Bunny', 24]) => {
   console.log(`My name is ${name}. I am ${age} years old and my favorite color is ${favColor}!`)
 };
