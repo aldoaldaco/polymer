@@ -15,4 +15,5 @@ https://docs.google.com/presentation/d/1pUXdXtZDcyFNe9jMIXkNIzBMDgcZTIA-zrufrDc0
 * https://refactoring.guru/design-patterns/behavioral-patterns
 * https://github.com/BrainJS/brain.js
 * https://material.io/
+* https://developer.mozilla.org/en-US/docs/Web/API
 
