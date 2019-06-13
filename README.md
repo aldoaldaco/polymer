@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a part of the Polymer course
+This is a part of Polymer course
 
 https://docs.google.com/presentation/d/1pUXdXtZDcyFNe9jMIXkNIzBMDgcZTIA-zrufrDc0oYI/edit?usp=sharing
 
