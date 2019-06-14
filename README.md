@@ -17,4 +17,4 @@ https://docs.google.com/presentation/d/1pUXdXtZDcyFNe9jMIXkNIzBMDgcZTIA-zrufrDc0
 * https://material.io/
 * https://developer.mozilla.org/en-US/docs/Web/API
 * https://developers.google.com/web/?hl=en
-
+* https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations?hl=es-419
