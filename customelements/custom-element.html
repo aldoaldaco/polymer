@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <my-custom-element if="laksjdjklasd"></my-custom-element>
+</body>
+<script>
+  class MyCustomElement extends HTMLElement {
+    constructor() {
+      super();
+      this.name = 'aldo';
+      if(this.hasAttribute('items')) {
+        const items = this.getAttribute('items');
+        this.innerHTML = `<b>ALGO</b>`;
+      }
+    }
+  }
+  window.customElements.define('my-custom-element', MyCustomElement);
+</script>
+</html>
