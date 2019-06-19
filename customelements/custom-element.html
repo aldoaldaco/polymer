@@ -5,19 +5,55 @@
   <title>Title</title>
 </head>
 <body>
-  <my-custom-element if="laksjdjklasd"></my-custom-element>
+  <my-custom-element blocks="3" color="red"></my-custom-element>
+  <button class="addItem">add Item</button>
+  <button class="removeItem">remove Item</button>
 </body>
+
+
 <script>
   class MyCustomElement extends HTMLElement {
     constructor() {
       super();
-      this.name = 'aldo';
-      if(this.hasAttribute('items')) {
-        const items = this.getAttribute('items');
-        this.innerHTML = `<b>ALGO</b>`;
+      // this.items = 0;
+
+      if(this.hasAttribute('blocks')) {
+        this.blocks = this.getAttribute('blocks');
+      }
+    }
+
+    static get observedAttributes() {
+      return ['blocks'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.blocks = newValue;
+      this.printBlocks();
+    }
+
+    printBlocks() {
+      this.innerHTML = '';
+      for(let i = 0; i < this.blocks; i++) {
+        this.innerHTML += `<div>ALGO</div>`;
       }
     }
   }
   window.customElements.define('my-custom-element', MyCustomElement);
+
+  // simple js
+  const element = document.querySelector('my-custom-element');
+  const button = document.querySelector('.addItem');
+  const removeButton = document.querySelector('.removeItem');
+
+  button.addEventListener('click', () => {
+    let blocks = parseInt(element.getAttribute('blocks'));
+    element.setAttribute('blocks', blocks + 1);
+  })
+
+  removeButton.addEventListener('click', () => {
+    let blocks = parseInt(element.getAttribute('blocks'));
+    element.setAttribute('blocks', blocks - 1);
+  })
+
 </script>
 </html>
