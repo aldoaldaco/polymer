@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <template id="MyTemplate" items="3">
+    <div>
+      pintate por favor
+    </div>
+  </template>
+  <my-template></my-template>
+</body>
+<script>
+  class MyTemplate extends HTMLElement {
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      const template = document.querySelector('#MyTemplate');
+      const clone = template.content.cloneNode(true);
+      this.appendChild(clone);
+    }
+  }
+  window.customElements.define('my-template', MyTemplate);
+</script>
+</html>

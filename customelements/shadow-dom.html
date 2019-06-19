@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div {
+      background-color: black;
+      color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div>jajajajjaaj</div>
+  <my-shadow-dom>
+    <input type="text">
+  </my-shadow-dom>
+</body>
+<script>
+  class MyShadowDom extends HTMLElement {
+    constructor() {
+      super();
+      const shadowRoot = this.attachShadow({mode: 'open'});
+      shadowRoot.innerHTML = `<div>algo</div>`;
+    }
+    static get name() {
+      return `my-shadow-dom`;
+    }
+  }
+  window.customElements.define(MyShadowDom.name, MyShadowDom);
+</script>
+<script>
+  /**
+   * Recordar que cuando el shadowDom esta cerrado no podemos obtener
+   * ningun nodo de ese sub arbol de dom
+   * */
+  const el = document.querySelector('my-shadow-dom');
+  console.log(el.shadowRoot.querySelector('div'));
+</script>
+</html>
