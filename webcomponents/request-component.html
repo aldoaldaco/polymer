@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>request-component</title>
+</head>
+<body>
+  <template id="RequestTemplate"></template>
+</body>
+<script>
+  class RequestComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.importDocument = document.currentScript.ownerDocument;
+      this.templateContent = this.importDocument.querySelector('#RequestTemplate');
+      this.status = false;
+    }
+
+    connectedCallback() {
+      this.attachShadow({mode: 'open'});
+      const cloneTemplate = this.templateContent.content.cloneNode(true);
+      this.shadowRoot.appendChild(cloneTemplate);
+      if(this.hasAttribute('url')) {
+        this.url = this.getAttribute('url');
+        this.status = true;
+      }
+      if(this.hasAttribute('auto')) {
+        this.generateRequest();
+      }
+    }
+
+    static get observedAttributes() { return ['auto', 'url']; }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log(`Custom square element attributes ${name} changed ${oldValue} ==> ${newValue}`);
+        console.log(typeof newValue);
+    }
+
+    generateRequest() {
+      if(this.status) {
+        fetch(this.url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((users) => {
+            this.users = users.results;
+            this.sendResponse();
+          })
+          .catch(error => {
+            this.sendError(error);
+          });
+      } else {
+        throw new Error('Url not found');
+      }
+    }
+
+    sendResponse() {
+      this.dispatchEvent(new CustomEvent('users-ready', {
+        bubbles: true,
+        composed: true,
+        detail: this.users
+      }));
+    }
+
+    sendError(error) {
+      this.dispatchEvent(new CustomEvent('users-error', {
+        bubbles: true,
+        composed: true,
+        detail: error
+      }));
+    }
+
+    static get is() {
+      return `request-component`;
+    }
+  }
+  window.customElements.define(RequestComponent.is, RequestComponent);
+</script>
+</html>

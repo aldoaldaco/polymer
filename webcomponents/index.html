@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebComponents</title>
+  <link rel="import" href="my-component.html">
+  <link rel="import" href="request-component.html">
+  <style>
+    html {
+      --myMixin: {
+        background-color: black;
+      };
+      font-size: 10px;
+    }
+    div {
+      @apply --myMixin;
+    }
+    my-component {
+      --myMixin: {
+        background-color: yellow;
+        position: absolute;
+      };
+      --my-height: 500px;
+      --my-div-height: 1000px;
+    }
+    .settings {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: var(--my-width, 500px);
+      height: var(--my-width, 200px);
+    }
+    button {
+      font-size: 13px;
+      width: 4rem;
+      height: 2em;
+      border-radius: 0.2rem;
+      background-color: black;
+      color: yellow;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div>Something...</div>
+  <div id="ajax">
+    <request-component url="https://randomuser.me/api/?results=10"></request-component>
+  </div>
+  <my-component disabled></my-component>
+  <div class="settings">
+    <button onclick="rotate()">Rotate</button>
+    <button onclick="stop()">Stop</button>
+  </div>
+</body>
+<script>
+  const ajax = document.querySelector('#ajax');
+  const comp = document.createElement('my-component');
+  document.body.appendChild(comp);
+  ajax.addEventListener('users-ready', getUsers);
+  ajax.addEventListener('users-error', getError);
+  let users = [];
+  function getUsers(event) {
+    users = event.detail;
+    console.log(event.detail);
+  }
+  function getError(error) {
+    console.log(error.detail)
+  }
+  function rotate() {
+    const cube = document.querySelector('my-component');
+    cube.rotate();
+  }
+  function stop() {
+    const cube = document.querySelector('my-component');
+    cube.stop();
+  }
+</script>
+</html>

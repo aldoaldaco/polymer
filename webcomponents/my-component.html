@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MyComponent</title>
+</head>
+<body>
+    <template id="MyComponent">
+      <style>
+        :host {
+          display: block;
+          contain: content;
+          tab-index: 1;
+          --my-height: 400px;
+          --my-background-color: black;
+          --my-color: white;
+          position: relative;
+          width: var(--my-height, 200px);
+          height: var(--my-height,100px);
+          background-color: var(--my-background-color);
+          @apply --myMixin;
+        }
+        :host([disabled]) {
+          background-color: firebrick;
+          color: #000;
+        }
+        .cubo, .cubo .cara {
+          width: 200px;
+          height: 200px;
+        }
+        .cubo .cara {
+          position: absolute;
+        }
+        .cubo {
+          margin: 100px auto;
+        }
+        .cubo .cara#superior {
+          background-color: orange;
+        }
+        .cubo .cara#frente {
+          background-color: red;
+        }
+        .cubo .cara#atras {
+          background-color: green;
+        }
+        .cubo .cara#derecha {
+          background-color: blue;
+        }
+        .cubo .cara#izquierda {
+          background-color: yellow;
+        }
+        .cubo .cara#inferior {
+          background-color: fuchsia;
+        }
+
+        /*
+        3D Styles
+        */
+        .cubo {
+          transform-style: preserve-3d;
+          transform: perspective(700px) rotateX(-30deg) rotateY(-30deg);
+        }
+        .cubo .cara#derecha {
+          transform: rotateY(90deg) translateZ(100px);;
+        }
+        .cubo .cara#superior {
+          background-color: orange;
+          transform: rotateX(90deg) translateZ(100px);
+        }
+        .cubo .cara#frente {
+          background-color: red;
+          transform: translateZ(100px);
+        }
+        .cubo .cara#atras {
+          background-color: green;
+          transform: translateZ(-100px);
+        }
+        .cubo .cara#derecha {
+          background-color: blue;
+          transform: rotateY(90deg) translateZ(100px);
+        }
+        .cubo .cara#izquierda {
+          background-color: yellow;
+          transform: rotateY(-90deg) translateZ(100px);
+        }
+        .cubo .cara#inferior {
+          background-color: fuchsia;
+          transform: rotateX(-90deg) translateZ(100px);
+        }
+        .rotate {
+          animation: rotate 2s infinite linear;
+        }
+        @keyframes rotate {
+          0% { transform: rotateX( 0deg ) rotateY(   0deg ); }
+          100% { transform: rotateX( 360deg ) rotateY( 360deg ); }
+        }
+      </style>
+      <div class="cubo">
+        <div class="cara" id="superior"></div>
+        <div class="cara" id="frente"></div>
+        <div class="cara" id="derecha"></div>
+        <div class="cara" id="izquierda"></div>
+        <div class="cara" id="atras"></div>
+        <div class="cara" id="inferior"></div>
+      </div>
+    </template>
+</body>
+<script>
+  let importDocument = document.currentScript.ownerDocument;
+  class MyComponent extends HTMLElement {
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      this.templateContent = importDocument.querySelector('#MyComponent');
+      this.attachShadow({mode: 'open'});
+      const clone = this.templateContent.content.cloneNode(true);
+      this.shadowRoot.appendChild(clone);
+    }
+    rotate() {
+      this.shadowRoot.querySelector('.cubo').classList.add('rotate');
+    }
+    stop() {
+      this.shadowRoot.querySelector('.cubo').classList.remove('rotate');
+    }
+  }
+  window.customElements.define('my-component', MyComponent);
+</script>
+</html>
